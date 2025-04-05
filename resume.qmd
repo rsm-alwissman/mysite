@@ -1,0 +1,7 @@
+---
+title: "Alex's Resume"
+---
+
+About this site
+
+{{< pdf other_documents/"C:\Users\acwis\Downloads\AW Resume 4.2024.pdf" width=100% height=800 >}}
