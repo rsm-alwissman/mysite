@@ -1,0 +1,14 @@
+---
+title: "Homework 1"
+author: "Alex Wissman"
+---
+
+# Question 1
+
+Prof says make a chart.
+
+
+```{r}
+x <- 5
+print(x)
+```
