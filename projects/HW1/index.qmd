@@ -1,5 +1,5 @@
 ---
-title: "A Replication of Karlan and List (2007)"
+title: "Homework 1: A Replication of Karlan and List (2007)"
 author: "Alex Wissman"
 date: today
 callout-appearance: minimal # this hides the blue "i" icon on .callout-notes
@@ -19,7 +19,15 @@ This project seeks to replicate their results.
 
 ### Description
 
-_todo: Read the data into R/Python and describe the data_
+```{python}
+import pandas as pd
+
+# Load the data
+dataf = pd.read_stata("/home/jovyan/mysite/karlan_list_2007.dta")
+
+# Display the first few rows of the dataset
+print(dataf.head())
+```
 
 :::: {.callout-note collapse="true"}
 ### Variable Definitions
@@ -85,8 +93,33 @@ _todo: Read the data into R/Python and describe the data_
 
 As an ad hoc test of the randomization mechanism, I provide a series of tests that compare aspects of the treatment and control groups to assess whether they are statistically significantly different from one another.
 
-_todo: test a few variables other than the key outcome variables (for example, test months since last donation) to see if the treatment and control groups are statistically significantly different at the 95% confidence level. For at least one variable, perform the test as both t-test (use the formula in the class slides) and separately as a linear regression (regress for example mrm2 on treatment); confirm both methods yield the exact same results. It might be helpful to compare parts of your analysis to Table 1 in the paper. Be sure to comment on your results (hint: why is Table 1 included in the paper)._
+```{python}
+# The following is a t-test of months since last donation to evaluate the difference between the treatment and control groups.
+from scipy.stats import ttest_ind
 
+# Filter the data for treatment and control groups
+treatment_group = dataf[dataf['treatment'] == 1]['mrm2'].dropna()
+control_group = dataf[dataf['control'] == 1]['mrm2'].dropna()
+
+# Perform the t-test
+t_stat, p_value = ttest_ind(treatment_group, control_group, equal_var=False)
+
+# Check if the difference is statistically significant
+if p_value < 0.05:
+    print(f"The groups are significantly different (t={t_stat:.2f}, p={p_value:.4f}).")
+else:
+    print(f"The groups are not significantly different (t={t_stat:.2f}, p={p_value:.4f}).")
+```
+
+```{python}
+import pyrsm as rsm
+
+reg1 = rsm.model.regress({"dataf": dataf}, rvar="mrm2", evar=["treatment"])
+reg1.summary()
+```
+
+Note: the same p-value is observed between the two statistical tests.
+Both results yield a p-value that indicates there is not a statistically significant difference between treatment and control at the 95% confidence level.
 
 ## Experimental Results
 
@@ -94,9 +127,63 @@ _todo: test a few variables other than the key outcome variables (for example, t
 
 First, I analyze whether matched donations lead to an increased response rate of making a donation. 
 
-_todo: make a barplot with two bars. Each bar is the proportion of people who donated. One bar for treatment and one bar for control._
+```{python}
+import matplotlib.pyplot as plt
+# Calculate the proportion of people who donated in each group
+treatment_donated_proportion = dataf[dataf['treatment'] == 1]['gave'].mean()
+control_donated_proportion = dataf[dataf['control'] == 1]['gave'].mean()
+
+# Create a barplot
+bars = plt.bar(['Treatment', 'Control'], [treatment_donated_proportion, control_donated_proportion], color=['blue', 'orange'])
+
+# Add labels to show the values for each bar
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width() / 2, height, f'{height:.4f}', ha='center', va='bottom')
+
+plt.ylabel('Proportion of People Who Donated')
+plt.title('Proportion of People Who Donated by Group')
+plt.show()
+```
+
+```{python}
+```
+
+In the following code, I perform a t-test between the treatment and control groups on the binary outcome of whether any charitable donation was made.
+
+```{python}
+treatment_gave = dataf[dataf['treatment'] == 1]['gave']
+control_gave = dataf[dataf['control'] == 1]['gave']
+
+t_stat_gave, p_value_gave = ttest_ind(treatment_gave, control_gave, equal_var=False)
+
+if p_value_gave < 0.05:
+    print(f"The groups are significantly different (t={t_stat_gave:.2f}, p={p_value_gave:.4f}).")
+else:
+    print(f"The groups are not significantly different (t={t_stat_gave:.2f}, p={p_value_gave:.4f}).")
+```
+
+We found a statistically significant difference between the two groups in our experiment. The difference was strong enough that it's very unlikely to have occurred by random chance alone. Based on these results., we find that the treatment had a meaningful impact on donation rates.
 
 _todo: run a t-test between the treatment and control groups on the binary outcome of whether any charitable donation was made (you can do this as a bivariate linear regression if you want). It may help to confirm your calculations match Table 2a Panel A. Report your statistical results and interpret them in the context of the experiment (e.g., if you found a difference with a small p-value or something that was statistically significant at some threshold, what have you learned about human behavior? Use mostly English words, not numbers or stats, to explain your finding.)_
+
+The following is a probit regression on donation outcome based on treatment/control assignment.
+
+```{python}
+import statsmodels.api as sm
+
+# Define the outcome variable (gave) and the explanatory variable (treatment)
+dataf['intercept'] = 1  # Add an intercept for the regression
+explanatory_vars = ['treatment', 'intercept']
+outcome_var = 'gave'
+
+# Fit the probit model
+probit_model = sm.Probit(dataf[outcome_var], dataf[explanatory_vars])
+probit_results = probit_model.fit()
+
+# Print the summary of the regression results
+print(probit_results.summary())
+```
 
 _todo: run a probit regression where the outcome variable is whether any charitable donation was made and the explanatory variable is assignment to treatment or control._ 
 
@@ -152,14 +239,4 @@ print(x)
 ```{python}
 x=6
 print(x)
-```
-
-```{python}
-import pandas as pd
-
-# Load the data
-dataf = pd.read_stata("/home/jovyan/mysite/karlan_list_2007.dta")
-
-# Display the first few rows of the dataset
-print(dataf.head())
 ```
