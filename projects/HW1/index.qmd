@@ -21,6 +21,11 @@ This project seeks to replicate their results.
 
 ```{python}
 import pandas as pd
+import scipy as sp
+import numpy as np
+import statsmodels.api as sm
+import pyrsm as rsm
+import matplotlib.pyplot as plt
 
 # Load the data
 dataf = pd.read_stata("/home/jovyan/mysite/karlan_list_2007.dta")
@@ -165,8 +170,6 @@ else:
 
 We found a statistically significant difference between the two groups in our experiment. The difference was strong enough that it's very unlikely to have occurred by random chance alone. Based on these results., we find that the treatment had a meaningful impact on donation rates.
 
-_todo: run a t-test between the treatment and control groups on the binary outcome of whether any charitable donation was made (you can do this as a bivariate linear regression if you want). It may help to confirm your calculations match Table 2a Panel A. Report your statistical results and interpret them in the context of the experiment (e.g., if you found a difference with a small p-value or something that was statistically significant at some threshold, what have you learned about human behavior? Use mostly English words, not numbers or stats, to explain your finding.)_
-
 The following is a probit regression on donation outcome based on treatment/control assignment.
 
 ```{python}
@@ -185,32 +188,167 @@ probit_results = probit_model.fit()
 print(probit_results.summary())
 ```
 
-_todo: run a probit regression where the outcome variable is whether any charitable donation was made and the explanatory variable is assignment to treatment or control._ 
-
-_NOTE: Linear regression results appear replicate Table 3 column 1 in the paper. Probit results do not, despite Table 3 indicating its results come from probit regressions..._
-
 
 ### Differences between Match Rates
 
 Next, I assess the effectiveness of different sizes of matched donations on the response rate.
 
-_todo: Use a series of t-tests to test whether the size of the match ratio has an effect on whether people donate or not. For example, does the 2:1 match rate lead increase the likelihood that someone donates as compared to the 1:1 match rate? Do your results support the "figures suggest" comment the authors make on page 8?_
+```{python}
+# Filter the data for treatment group
+treatment_data = dataf[dataf['treatment'] == 1]
+
+# Define the match ratio columns to test
+match_ratios = ['ratio', 'ratio2', 'ratio3']
+
+# Perform t-tests for each match ratio
+for ratio in match_ratios:
+    # Ensure the column is numeric
+    treatment_data[ratio] = pd.to_numeric(treatment_data[ratio], errors='coerce')
+    
+    # Separate the groups based on whether 'gave' is 1 or 0
+    gave_1 = treatment_data[treatment_data['gave'] == 1][ratio].dropna()
+    gave_0 = treatment_data[treatment_data['gave'] == 0][ratio].dropna()
+    
+    # Perform the t-test
+    t_stat, p_value = ttest_ind(gave_1, gave_0, equal_var=False)
+    
+    # Print the results
+    print(f"T-test for {ratio}: t-statistic = {t_stat:.2f}, p-value = {p_value:.4f}")
+    if p_value < 0.05:
+        print(f"  The match ratio '{ratio}' has a significant effect on donation behavior.")
+    else:
+        print(f"  The match ratio '{ratio}' does not have a significant effect on donation behavior.")
+```
+
+These results support the "figures suggest" comment the authors make. We do not find that match threshold had a meaningful influence on behavior.
+
+
+```{python}
+import statsmodels.api as sm
+
+# Create the variable 'ratio1'
+dataf['ratio1'] = dataf['ratio'].apply(lambda x: 1 if x == 1 else 0)
+
+# Define the explanatory variables and the outcome variable
+explanatory_vars = ['ratio1', 'ratio2', 'ratio3', 'intercept']
+outcome_var = 'gave'
+
+# Drop rows with missing or infinite values in the explanatory variables
+dataf_cleaned = dataf[explanatory_vars + [outcome_var]].replace([np.inf, -np.inf], np.nan).dropna()
+
+# Fit the regression model
+regression_model = sm.Logit(dataf_cleaned[outcome_var], dataf_cleaned[explanatory_vars])
+regression_results = regression_model.fit()
+
+# Print the summary of the regression results
+print(regression_results.summary())
+```
+
+These results support the same findings that ratio levels do not influence donation behavior.
 
 _todo: Assess the same issue using a regression. Specifically, create the variable `ratio1` then regress `gave` on `ratio1`, `ratio2`, and `ratio3` (or alternatively, regress `gave` on the categorical variable `ratio`). Interpret the coefficients and their statistical precision._
 
-_todo: Calculate the response rate difference between the 1:1 and 2:1 match ratios and the 2:1 and 3:1 ratios.  Do this directly from the data, and do it by computing the differences in the fitted coefficients of the previous regression. what do you conclude regarding the effectiveness of different sizes of matched donations?_
+```{python}
+# Directly from the data
+response_rate_1_1 = dataf[dataf['ratio'] == 1]['gave'].mean()
+response_rate_2_1 = dataf[dataf['ratio'] == 2]['gave'].mean()
+response_rate_3_1 = dataf[dataf['ratio'] == 3]['gave'].mean()
 
+# Calculate the differences in response rates
+diff_1_1_2_1 = response_rate_2_1 - response_rate_1_1
+diff_2_1_3_1 = response_rate_3_1 - response_rate_2_1
+
+print(f"Response rate difference (1:1 vs 2:1): {diff_1_1_2_1:.4f}")
+print(f"Response rate difference (2:1 vs 3:1): {diff_2_1_3_1:.4f}")
+
+# Using the fitted coefficients
+coef_ratio2 = regression_results.params['ratio2']
+coef_ratio3 = regression_results.params['ratio3']
+
+# Calculate the differences in coefficients
+diff_coef_1_1_2_1 = coef_ratio2
+diff_coef_2_1_3_1 = coef_ratio3 - coef_ratio2
+
+print(f"Coefficient difference (1:1 vs 2:1): {diff_coef_1_1_2_1:.4f}")
+print(f"Coefficient difference (2:1 vs 3:1): {diff_coef_2_1_3_1:.4f}")
+```
+
+Conclusion: Regarding the effectiveness of different sizes of matched donations, the findings suggest that there is a larger difference in coefficients between 1:1 matching and 2:1 matching compared to the difference between 2:1 matching and 3:1 matching. This indicates that increasing the match size from 1:1 to 2:1 has a more pronounced effect on donation behavior than increasing it from 2:1 to 3:1.
 
 ### Size of Charitable Contribution
 
 In this subsection, I analyze the effect of the size of matched donation on the size of the charitable contribution.
 
-_todo: Calculate a t-test or run a bivariate linear regression of the donation amount on the treatment status. What do we learn from doing this analysis?_
+```{python}
+from scipy.stats import ttest_ind
 
-_todo: now limit the data to just people who made a donation and repeat the previous analysis. This regression allows you to analyze how much respondents donate conditional on donating some positive amount. Interpret the regression coefficients -- what did we learn? Does the treatment coefficient have a causal interpretation?_ 
+import statsmodels.api as sm
 
-_todo: Make two plots: one for the treatment group and one for the control. Each plot should be a histogram of the donation amounts only among people who donated. Add a red vertical bar or some other annotation to indicate the sample average for each plot._
+# Filter the data for non-missing donation amounts
+dataf_filtered = dataf.dropna(subset=['amount'])
 
+# Separate the donation amounts by treatment status
+treatment_amount = dataf_filtered[dataf_filtered['treatment'] == 1]['amount']
+control_amount = dataf_filtered[dataf_filtered['control'] == 1]['amount']
+
+# Perform a t-test
+t_stat_amount, p_value_amount = ttest_ind(treatment_amount, control_amount, equal_var=False)
+print(f"T-test results: t-statistic = {t_stat_amount:.2f}, p-value = {p_value_amount:.4f}")
+
+# Prepare data for regression
+dataf_filtered['intercept'] = 1  # Add intercept
+X = dataf_filtered[['treatment', 'intercept']]
+y = dataf_filtered['amount']
+
+# Fit a bivariate linear regression model
+regression_model_amount = sm.OLS(y, X).fit()
+
+# Print the regression summary
+print(regression_model_amount.summary())
+```
+
+The analysis indicates that the treatment did not produce a statistically significant impact on the amount donated.
+
+```{python}
+dataf_positive_amount = dataf[dataf['amount'] > 0]
+reg1 = rsm.model.regress({"dataf_positive_amount": dataf_positive_amount}, rvar="amount", evar=["treatment"])
+reg1.summary()
+```
+
+Histogram plots of the donation amounts only among people who donated:
+
+```{python}
+import matplotlib.pyplot as plt
+
+# Filter donation amounts for people who donated in each group
+treatment_donations = treatment_amount[treatment_amount > 0]
+control_donations = control_amount[control_amount > 0]
+
+# Calculate the sample averages
+treatment_avg = treatment_donations.mean()
+control_avg = control_donations.mean()
+
+# Create the histograms
+fig, axes = plt.subplots(1, 2, figsize=(12, 6), sharey=True)
+
+# Treatment group histogram
+axes[0].hist(treatment_donations, bins=30, color='blue', alpha=0.7, edgecolor='black')
+axes[0].axvline(treatment_avg, color='red', linestyle='dashed', linewidth=2, label=f'Avg: {treatment_avg:.2f}')
+axes[0].set_title('Treatment Group Donations')
+axes[0].set_xlabel('Donation Amount')
+axes[0].set_ylabel('Frequency')
+axes[0].legend()
+
+# Control group histogram
+axes[1].hist(control_donations, bins=30, color='green', alpha=0.7, edgecolor='black')
+axes[1].axvline(control_avg, color='red', linestyle='dashed', linewidth=2, label=f'Avg: {control_avg:.2f}')
+axes[1].set_title('Control Group Donations')
+axes[1].set_xlabel('Donation Amount')
+axes[1].legend()
+
+plt.tight_layout()
+plt.show()
+```
 
 ## Simulation Experiment
 
@@ -222,10 +360,69 @@ Further suppose that the true distribution of respondents who do get a charitabl
 
 ### Law of Large Numbers
 
-_to do:  Simulate 10,000 draws from the control distribution and 10,000 draws from the treatment distribution. You'll then calculate a vector of 10,000 differences, and then you'll plot the cumulative average of that vector of differences. This average will likely be "noisey" when only averaging a few numbers, but should "settle down" and approximate the treatment effect (0.004 = 0.022 - 0.018) as the sample size gets large. Explain the chart to the reader._
+```{python}
+# Set the probabilities for control and treatment groups
+p_control = 0.018
+p_treatment = 0.022
 
+# Simulate 10,000 draws from the Bernoulli distributions
+control_draws = np.random.binomial(1, p_control, 10000)
+treatment_draws = np.random.binomial(1, p_treatment, 10000)
+
+# Calculate the vector of differences
+differences = treatment_draws - control_draws
+
+# Calculate the cumulative average of the differences
+cumulative_avg = np.cumsum(differences) / np.arange(1, len(differences) + 1)
+
+# Plot the cumulative average
+plt.figure(figsize=(10, 6))
+plt.plot(cumulative_avg, label='Cumulative Average of Differences', color='blue')
+plt.axhline(0, color='red', linestyle='--', label='Zero Line')
+plt.xlabel('Number of Simulations')
+plt.ylabel('Cumulative Average')
+plt.title('Cumulative Average of Differences Between Treatment and Control')
+plt.legend()
+plt.grid()
+plt.show()
+```
+
+The chart illustrates the cumulative average of the differences between the treatment and control groups over 10,000 simulations. Initially, when only a few numbers are averaged, the cumulative average is "noisy" and fluctuates significantly due to the small sample size. However, as the sample size increases, the cumulative average begins to stabilize and converge toward the true treatment effect, which is approximately 0.004 (calculated as 0.022 - 0.018). This behavior demonstrates the law of large numbers, where larger sample sizes reduce variability and provide a more accurate estimate of the true effect. The red dashed line at zero serves as a reference point, highlighting the positive treatment effect as the cumulative average settles above this line.
 
 ### Central Limit Theorem
+
+```{python}
+# Set the probabilities for control and treatment groups
+p_control = 0.018
+p_treatment = 0.022
+
+# Define sample sizes
+sample_sizes = [50, 200, 500, 1000]
+
+# Create subplots
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+axes = axes.flatten()
+
+# Generate histograms for each sample size
+for i, sample_size in enumerate(sample_sizes):
+    avg_differences = []
+    for _ in range(1000):
+        control_sample = np.random.binomial(1, p_control, sample_size)
+        treatment_sample = np.random.binomial(1, p_treatment, sample_size)
+        avg_difference = treatment_sample.mean() - control_sample.mean()
+        avg_differences.append(avg_difference)
+    
+    # Plot the histogram
+    axes[i].hist(avg_differences, bins=30, color='blue', alpha=0.7, edgecolor='black')
+    axes[i].set_title(f'Sample Size: {sample_size}')
+    axes[i].set_xlabel('Average Difference')
+    axes[i].set_ylabel('Frequency')
+
+plt.tight_layout()
+plt.show()
+```
+
+The histograms illustrate the Central Limit Theorem (CLT): as sample size increases (50, 200, 500, 1000), the sampling distribution of the sample mean becomes smoother and more symmetric, converging toward a normal distribution. Larger sample sizes reduce variability and provide more precise estimates of the true mean.
 
 _to do: Make 4 histograms at sample sizes 50, 200, 500, and 1000.  To do this for a sample size of e.g. 50, take 50 draws from each of the control and treatment distributions, and calculate the average difference between those draws. Then repeat that process 999 more times so that you have 1000 averages. Plot the histogram of those averages. The repeat for the other 3 histograms. Explain this sequence of histograms and its relationship to the central limit theorem to the reader._
 
@@ -233,10 +430,5 @@ _to do: Make 4 histograms at sample sizes 50, 200, 500, and 1000.  To do this fo
 
 ```{r}
 x <- 5
-print(x)
-```
-
-```{python}
-x=6
 print(x)
 ```
