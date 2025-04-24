@@ -424,9 +424,6 @@ plt.show()
 
 The histograms illustrate the Central Limit Theorem (CLT): as sample size increases (50, 200, 500, 1000), the sampling distribution of the sample mean becomes smoother and more symmetric, converging toward a normal distribution. Larger sample sizes reduce variability and provide more precise estimates of the true mean.
 
-_to do: Make 4 histograms at sample sizes 50, 200, 500, and 1000.  To do this for a sample size of e.g. 50, take 50 draws from each of the control and treatment distributions, and calculate the average difference between those draws. Then repeat that process 999 more times so that you have 1000 averages. Plot the histogram of those averages. The repeat for the other 3 histograms. Explain this sequence of histograms and its relationship to the central limit theorem to the reader._
-
-
 
 ```{r}
 x <- 5
