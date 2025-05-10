@@ -6,7 +6,7 @@
       "source": [
         "---\n",
         "title: \"Homework 2: Poisson Regression Examples\"\n",
-        "author: \"Your Name\"\n",
+        "author: \"Alex Wissman\"\n",
         "date: today\n",
         "callout-appearance: minimal # this hides the blue \"i\" icon on .callout-notes\n",
         "---\n",
@@ -23,7 +23,7 @@
         "\n",
         "### Data"
       ],
-      "id": "0b337f56"
+      "id": "ca6b70a0"
     },
     {
       "cell_type": "code",
@@ -41,7 +41,7 @@
         "print(\"\\nBlueprinty Data:\")\n",
         "print(blueprinty_data.head())"
       ],
-      "id": "aa0d5cfd",
+      "id": "a8302fb4",
       "execution_count": null,
       "outputs": []
     },
@@ -130,7 +130,7 @@
         "\n",
         "_todo: Assume the number of reviews is a good proxy for the number of bookings. Perform some exploratory data analysis to get a feel for the data, handle or drop observations with missing values on relevant variables, build one or more models (e.g., a poisson regression model for the number of bookings as proxied by the number of reviews), and interpret model coefficients to describe variation in the number of reviews as a function of the variables provided._"
       ],
-      "id": "e5853e63"
+      "id": "11a21eb0"
     }
   ],
   "metadata": {

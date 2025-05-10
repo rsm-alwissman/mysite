@@ -17,6 +17,20 @@ However, Blueprinty has collected data on 1,500 mature (non-startup) engineering
 
 ### Data
 
+```{python}
+import pandas as pd
+# Load and read the files
+airbnb_data = pd.read_csv('/home/jovyan/mysite/airbnb.csv')
+blueprinty_data = pd.read_csv('/home/jovyan/mysite/blueprinty.csv')
+
+# Display the first few rows of each dataset
+print("Airbnb Data:")
+print(airbnb_data.head())
+
+print("\nBlueprinty Data:")
+print(blueprinty_data.head())
+```
+
 _todo: Read in data._
 
 _todo: Compare histograms and means of number of patents by customer status. What do you observe?_
