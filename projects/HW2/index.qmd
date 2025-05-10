@@ -16,3 +16,13 @@ However, Blueprinty has collected data on 1,500 mature (non-startup) engineering
 
 
 ### Data
+```{python}
+import pandas as pd
+
+# Load the datasets
+airbnb_data = pd.read_csv('/home/jovyan/mysite/airbnb.csv')
+blueprinty_data = pd.read_csv('/home/jovyan/mysite/blueprinty.csv')
+
+# Display the first few rows of each dataset
+airbnb_data.head(), blueprinty_data.head()
+```
