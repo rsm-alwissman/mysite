@@ -14,6 +14,10 @@ By comparing the response rates and donation amounts across the three groups, Ka
 
 This project seeks to replicate their results.
 
+```{python}
+import sys
+print(sys.executable)
+```
 
 ## Data
 
