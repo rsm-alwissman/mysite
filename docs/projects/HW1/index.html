@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alex Wissman">
-<meta name="dcterms.date" content="2025-05-11">
+<meta name="dcterms.date" content="2025-05-12">
 
 <title>Homework 1: A Replication of Karlan and List (2007) – Alex Wissman</title>
 <style>
@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 11, 2025</p>
+      <p class="date">May 12, 2025</p>
     </div>
   </div>
   
@@ -595,8 +595,8 @@ Nr obs: 50,082 (1 obs. dropped)</code></pre>
 Dep. Variable:                   gave   No. Observations:                50083
 Model:                         Probit   Df Residuals:                    50081
 Method:                           MLE   Df Model:                            1
-Date:                Sun, 11 May 2025   Pseudo R-squ.:               0.0009783
-Time:                        15:21:16   Log-Likelihood:                -5030.5
+Date:                Mon, 12 May 2025   Pseudo R-squ.:               0.0009783
+Time:                        14:08:52   Log-Likelihood:                -5030.5
 converged:                       True   LL-Null:                       -5035.4
 Covariance Type:            nonrobust   LLR p-value:                  0.001696
 ==============================================================================
@@ -680,8 +680,8 @@ T-test for ratio3: t-statistic = 0.61, p-value = 0.5443
 Dep. Variable:                   gave   No. Observations:                50083
 Model:                          Logit   Df Residuals:                    50079
 Method:                           MLE   Df Model:                            3
-Date:                Sun, 11 May 2025   Pseudo R-squ.:                0.001108
-Time:                        15:21:16   Log-Likelihood:                -5029.8
+Date:                Mon, 12 May 2025   Pseudo R-squ.:                0.001108
+Time:                        14:08:52   Log-Likelihood:                -5029.8
 converged:                       True   LL-Null:                       -5035.4
 Covariance Type:            nonrobust   LLR p-value:                   0.01091
 ==============================================================================
@@ -770,8 +770,8 @@ intercept     -4.0073      0.058    -68.556      0.000      -4.122      -3.893
 Dep. Variable:                 amount   R-squared:                       0.000
 Model:                            OLS   Adj. R-squared:                  0.000
 Method:                 Least Squares   F-statistic:                     3.461
-Date:                Sun, 11 May 2025   Prob (F-statistic):             0.0628
-Time:                        15:21:16   Log-Likelihood:            -1.7946e+05
+Date:                Mon, 12 May 2025   Prob (F-statistic):             0.0628
+Time:                        14:08:53   Log-Likelihood:            -1.7946e+05
 No. Observations:               50083   AIC:                         3.589e+05
 Df Residuals:                   50081   BIC:                         3.589e+05
 Df Model:                           1                                         
@@ -929,44 +929,45 @@ Nr obs: 1,034</code></pre>
 <span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>    axes[i].set_xlabel(<span class="st">'Average Difference'</span>)</span>
 <span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>    axes[i].set_ylabel(<span class="st">'Frequency'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(array([  5.,   0.,   0.,  18.,   0.,   0.,  81.,   0.,   0.,   0., 196.,
-         0.,   0., 298.,   0.,   0., 256.,   0.,   0.,   0.,  91.,   0.,
-         0.,  41.,   0.,   0.,  13.,   0.,   0.,   1.]), array([-0.08 , -0.074, -0.068, -0.062, -0.056, -0.05 , -0.044, -0.038,
+<pre><code>(array([  3.,   0.,   0.,  16.,   0.,   0.,  63.,   0.,   0.,   0., 206.,
+         0.,   0., 323.,   0.,   0., 219.,   0.,   0.,   0., 122.,   0.,
+         0.,  34.,   0.,   0.,  13.,   0.,   0.,   1.]), array([-0.08 , -0.074, -0.068, -0.062, -0.056, -0.05 , -0.044, -0.038,
        -0.032, -0.026, -0.02 , -0.014, -0.008, -0.002,  0.004,  0.01 ,
         0.016,  0.022,  0.028,  0.034,  0.04 ,  0.046,  0.052,  0.058,
         0.064,  0.07 ,  0.076,  0.082,  0.088,  0.094,  0.1  ]), &lt;BarContainer object of 30 artists&gt;)
 Text(0.5, 1.0, 'Sample Size: 50')
 Text(0.5, 0, 'Average Difference')
 Text(0, 0.5, 'Frequency')
-(array([  1.,   0.,   0.,   2.,   5.,   9.,  23.,   0.,  37.,  21.,  32.,
-        73.,   0., 111.,   0., 145., 144.,   0., 139.,   0.,  97.,  71.,
-         0.,  53.,   0.,  18.,  11.,   0.,   6.,   2.]), array([-0.045, -0.042, -0.039, -0.036, -0.033, -0.03 , -0.027, -0.024,
-       -0.021, -0.018, -0.015, -0.012, -0.009, -0.006, -0.003,  0.   ,
-        0.003,  0.006,  0.009,  0.012,  0.015,  0.018,  0.021,  0.024,
-        0.027,  0.03 ,  0.033,  0.036,  0.039,  0.042,  0.045]), &lt;BarContainer object of 30 artists&gt;)
+(array([  3.,   3.,   0.,   8.,   0.,  14.,  32.,   0.,  65.,   0.,  81.,
+       108.,   0., 155.,   0., 144., 136.,   0.,  96.,   0.,  62.,  47.,
+         0.,  20.,   0.,  17.,   6.,   0.,   1.,   2.]), array([-0.04 , -0.037, -0.034, -0.031, -0.028, -0.025, -0.022, -0.019,
+       -0.016, -0.013, -0.01 , -0.007, -0.004, -0.001,  0.002,  0.005,
+        0.008,  0.011,  0.014,  0.017,  0.02 ,  0.023,  0.026,  0.029,
+        0.032,  0.035,  0.038,  0.041,  0.044,  0.047,  0.05 ]), &lt;BarContainer object of 30 artists&gt;)
 Text(0.5, 1.0, 'Sample Size: 200')
 Text(0.5, 0, 'Average Difference')
 Text(0, 0.5, 'Frequency')
-(array([  2.,   2.,   4.,   8.,  14.,  16.,  24.,  32.,  39.,  55.,  79.,
-        76., 119.,  86.,  88.,  88.,  86.,  65.,  11.,  32.,  30.,  11.,
-        12.,  12.,   3.,   4.,   0.,   1.,   0.,   1.]), array([-2.20000000e-02, -2.00000000e-02, -1.80000000e-02, -1.60000000e-02,
-       -1.40000000e-02, -1.20000000e-02, -1.00000000e-02, -8.00000000e-03,
-       -6.00000000e-03, -4.00000000e-03, -2.00000000e-03, -3.46944695e-18,
-        2.00000000e-03,  4.00000000e-03,  6.00000000e-03,  8.00000000e-03,
-        1.00000000e-02,  1.20000000e-02,  1.40000000e-02,  1.60000000e-02,
-        1.80000000e-02,  2.00000000e-02,  2.20000000e-02,  2.40000000e-02,
-        2.60000000e-02,  2.80000000e-02,  3.00000000e-02,  3.20000000e-02,
-        3.40000000e-02,  3.60000000e-02,  3.80000000e-02]), &lt;BarContainer object of 30 artists&gt;)
+(array([ 2.,  1.,  0.,  6.,  2., 13., 19., 20., 29., 36., 57., 80., 81.,
+       83., 89., 83., 83., 81., 58., 58., 37., 30., 14., 18.,  5.,  4.,
+        5.,  4.,  1.,  1.]), array([-0.024     , -0.02206667, -0.02013333, -0.0182    , -0.01626667,
+       -0.01433333, -0.0124    , -0.01046667, -0.00853333, -0.0066    ,
+       -0.00466667, -0.00273333, -0.0008    ,  0.00113333,  0.00306667,
+        0.005     ,  0.00693333,  0.00886667,  0.0108    ,  0.01273333,
+        0.01466667,  0.0166    ,  0.01853333,  0.02046667,  0.0224    ,
+        0.02433333,  0.02626667,  0.0282    ,  0.03013333,  0.03206667,
+        0.034     ]), &lt;BarContainer object of 30 artists&gt;)
 Text(0.5, 1.0, 'Sample Size: 500')
 Text(0.5, 0, 'Average Difference')
 Text(0, 0.5, 'Frequency')
-(array([  3.,   2.,   2.,   7.,   2.,   7.,  17.,  26.,  18.,  34.,  63.,
-        42.,  36., 100.,  76.,  69., 128.,  62.,  54.,  48.,  70.,  33.,
-        33.,  27.,  12.,  10.,  12.,   2.,   2.,   3.]), array([-0.016 , -0.0147, -0.0134, -0.0121, -0.0108, -0.0095, -0.0082,
-       -0.0069, -0.0056, -0.0043, -0.003 , -0.0017, -0.0004,  0.0009,
-        0.0022,  0.0035,  0.0048,  0.0061,  0.0074,  0.0087,  0.01  ,
-        0.0113,  0.0126,  0.0139,  0.0152,  0.0165,  0.0178,  0.0191,
-        0.0204,  0.0217,  0.023 ]), &lt;BarContainer object of 30 artists&gt;)
+(array([  1.,   1.,   4.,   3.,   3.,  22.,   7.,  15.,  62.,  38.,  70.,
+        55.,  60., 110.,  59.,  71., 115.,  64.,  51.,  66.,  35.,  43.,
+        13.,  13.,  11.,   3.,   1.,   2.,   0.,   2.]), array([-0.016     , -0.01463333, -0.01326667, -0.0119    , -0.01053333,
+       -0.00916667, -0.0078    , -0.00643333, -0.00506667, -0.0037    ,
+       -0.00233333, -0.00096667,  0.0004    ,  0.00176667,  0.00313333,
+        0.0045    ,  0.00586667,  0.00723333,  0.0086    ,  0.00996667,
+        0.01133333,  0.0127    ,  0.01406667,  0.01543333,  0.0168    ,
+        0.01816667,  0.01953333,  0.0209    ,  0.02226667,  0.02363333,
+        0.025     ]), &lt;BarContainer object of 30 artists&gt;)
 Text(0.5, 1.0, 'Sample Size: 1000')
 Text(0.5, 0, 'Average Difference')
 Text(0, 0.5, 'Frequency')</code></pre>
