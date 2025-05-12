@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alex Wissman">
-<meta name="dcterms.date" content="2025-05-11">
+<meta name="dcterms.date" content="2025-05-12">
 
-<title>Homework 1: A Replication of Karlan and List (2007) – Alex Wissman</title>
+<title>Homework 2: A Replication of Karlan and List (2007) – Alex Wissman</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -177,7 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Homework 1: A Replication of Karlan and List (2007)</h1>
+<h1 class="title">Homework 2: A Replication of Karlan and List (2007)</h1>
 </div>
 
 
@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 11, 2025</p>
+      <p class="date">May 12, 2025</p>
     </div>
   </div>
   
@@ -549,7 +549,7 @@ Nr obs: 50,082 (1 obs. dropped)</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index-copy_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -595,8 +595,8 @@ Nr obs: 50,082 (1 obs. dropped)</code></pre>
 Dep. Variable:                   gave   No. Observations:                50083
 Model:                         Probit   Df Residuals:                    50081
 Method:                           MLE   Df Model:                            1
-Date:                Sun, 11 May 2025   Pseudo R-squ.:               0.0009783
-Time:                        15:21:16   Log-Likelihood:                -5030.5
+Date:                Mon, 12 May 2025   Pseudo R-squ.:               0.0009783
+Time:                        13:56:54   Log-Likelihood:                -5030.5
 converged:                       True   LL-Null:                       -5035.4
 Covariance Type:            nonrobust   LLR p-value:                  0.001696
 ==============================================================================
@@ -680,8 +680,8 @@ T-test for ratio3: t-statistic = 0.61, p-value = 0.5443
 Dep. Variable:                   gave   No. Observations:                50083
 Model:                          Logit   Df Residuals:                    50079
 Method:                           MLE   Df Model:                            3
-Date:                Sun, 11 May 2025   Pseudo R-squ.:                0.001108
-Time:                        15:21:16   Log-Likelihood:                -5029.8
+Date:                Mon, 12 May 2025   Pseudo R-squ.:                0.001108
+Time:                        13:56:55   Log-Likelihood:                -5029.8
 converged:                       True   LL-Null:                       -5035.4
 Covariance Type:            nonrobust   LLR p-value:                   0.01091
 ==============================================================================
@@ -770,8 +770,8 @@ intercept     -4.0073      0.058    -68.556      0.000      -4.122      -3.893
 Dep. Variable:                 amount   R-squared:                       0.000
 Model:                            OLS   Adj. R-squared:                  0.000
 Method:                 Least Squares   F-statistic:                     3.461
-Date:                Sun, 11 May 2025   Prob (F-statistic):             0.0628
-Time:                        15:21:16   Log-Likelihood:            -1.7946e+05
+Date:                Mon, 12 May 2025   Prob (F-statistic):             0.0628
+Time:                        13:56:55   Log-Likelihood:            -1.7946e+05
 No. Observations:               50083   AIC:                         3.589e+05
 Df Residuals:                   50081   BIC:                         3.589e+05
 Df Model:                           1                                         
@@ -851,7 +851,7 @@ Nr obs: 1,034</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="index-copy_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid figure-img" width="1152"></p>
 </figure>
 </div>
 </div>
@@ -893,7 +893,7 @@ Nr obs: 1,034</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-14-5.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="index-copy_files/figure-html/unnamed-chunk-14-5.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -929,44 +929,45 @@ Nr obs: 1,034</code></pre>
 <span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>    axes[i].set_xlabel(<span class="st">'Average Difference'</span>)</span>
 <span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>    axes[i].set_ylabel(<span class="st">'Frequency'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(array([  5.,   0.,   0.,  18.,   0.,   0.,  81.,   0.,   0.,   0., 196.,
-         0.,   0., 298.,   0.,   0., 256.,   0.,   0.,   0.,  91.,   0.,
-         0.,  41.,   0.,   0.,  13.,   0.,   0.,   1.]), array([-0.08 , -0.074, -0.068, -0.062, -0.056, -0.05 , -0.044, -0.038,
-       -0.032, -0.026, -0.02 , -0.014, -0.008, -0.002,  0.004,  0.01 ,
-        0.016,  0.022,  0.028,  0.034,  0.04 ,  0.046,  0.052,  0.058,
-        0.064,  0.07 ,  0.076,  0.082,  0.088,  0.094,  0.1  ]), &lt;BarContainer object of 30 artists&gt;)
+<pre><code>(array([  1.,   0.,   0.,   0.,   4.,   0.,   0.,  24.,   0.,  59.,  15.,
+         0., 182.,   0.,   0., 319.,   0., 232.,   0., 112.,   0.,   0.,
+        41.,   0.,   9.,   0.,   0.,   1.,   0.,   1.]), array([-0.12 , -0.112, -0.104, -0.096, -0.088, -0.08 , -0.072, -0.064,
+       -0.056, -0.048, -0.04 , -0.032, -0.024, -0.016, -0.008,  0.   ,
+        0.008,  0.016,  0.024,  0.032,  0.04 ,  0.048,  0.056,  0.064,
+        0.072,  0.08 ,  0.088,  0.096,  0.104,  0.112,  0.12 ]), &lt;BarContainer object of 30 artists&gt;)
 Text(0.5, 1.0, 'Sample Size: 50')
 Text(0.5, 0, 'Average Difference')
 Text(0, 0.5, 'Frequency')
-(array([  1.,   0.,   0.,   2.,   5.,   9.,  23.,   0.,  37.,  21.,  32.,
-        73.,   0., 111.,   0., 145., 144.,   0., 139.,   0.,  97.,  71.,
-         0.,  53.,   0.,  18.,  11.,   0.,   6.,   2.]), array([-0.045, -0.042, -0.039, -0.036, -0.033, -0.03 , -0.027, -0.024,
-       -0.021, -0.018, -0.015, -0.012, -0.009, -0.006, -0.003,  0.   ,
-        0.003,  0.006,  0.009,  0.012,  0.015,  0.018,  0.021,  0.024,
-        0.027,  0.03 ,  0.033,  0.036,  0.039,  0.042,  0.045]), &lt;BarContainer object of 30 artists&gt;)
+(array([  3.,   2.,   0.,  10.,   0.,  14.,  28.,   0.,  50.,   0.,  81.,
+       118.,   0., 131.,   0., 147., 135.,   0., 106.,   0.,  83.,  46.,
+         0.,  27.,   0.,   8.,   6.,   0.,   4.,   1.]), array([-0.04 , -0.037, -0.034, -0.031, -0.028, -0.025, -0.022, -0.019,
+       -0.016, -0.013, -0.01 , -0.007, -0.004, -0.001,  0.002,  0.005,
+        0.008,  0.011,  0.014,  0.017,  0.02 ,  0.023,  0.026,  0.029,
+        0.032,  0.035,  0.038,  0.041,  0.044,  0.047,  0.05 ]), &lt;BarContainer object of 30 artists&gt;)
 Text(0.5, 1.0, 'Sample Size: 200')
 Text(0.5, 0, 'Average Difference')
 Text(0, 0.5, 'Frequency')
-(array([  2.,   2.,   4.,   8.,  14.,  16.,  24.,  32.,  39.,  55.,  79.,
-        76., 119.,  86.,  88.,  88.,  86.,  65.,  11.,  32.,  30.,  11.,
-        12.,  12.,   3.,   4.,   0.,   1.,   0.,   1.]), array([-2.20000000e-02, -2.00000000e-02, -1.80000000e-02, -1.60000000e-02,
-       -1.40000000e-02, -1.20000000e-02, -1.00000000e-02, -8.00000000e-03,
-       -6.00000000e-03, -4.00000000e-03, -2.00000000e-03, -3.46944695e-18,
-        2.00000000e-03,  4.00000000e-03,  6.00000000e-03,  8.00000000e-03,
-        1.00000000e-02,  1.20000000e-02,  1.40000000e-02,  1.60000000e-02,
-        1.80000000e-02,  2.00000000e-02,  2.20000000e-02,  2.40000000e-02,
-        2.60000000e-02,  2.80000000e-02,  3.00000000e-02,  3.20000000e-02,
-        3.40000000e-02,  3.60000000e-02,  3.80000000e-02]), &lt;BarContainer object of 30 artists&gt;)
+(array([  1.,   0.,   0.,   2.,   7.,   8.,   9.,  13.,  38.,  40.,  44.,
+        60.,  69.,  84.,  76., 100.,  92.,  90.,  73.,  65.,  45.,  28.,
+        17.,  13.,  12.,   6.,   5.,   2.,   0.,   1.]), array([-0.026     , -0.02406667, -0.02213333, -0.0202    , -0.01826667,
+       -0.01633333, -0.0144    , -0.01246667, -0.01053333, -0.0086    ,
+       -0.00666667, -0.00473333, -0.0028    , -0.00086667,  0.00106667,
+        0.003     ,  0.00493333,  0.00686667,  0.0088    ,  0.01073333,
+        0.01266667,  0.0146    ,  0.01653333,  0.01846667,  0.0204    ,
+        0.02233333,  0.02426667,  0.0262    ,  0.02813333,  0.03006667,
+        0.032     ]), &lt;BarContainer object of 30 artists&gt;)
 Text(0.5, 1.0, 'Sample Size: 500')
 Text(0.5, 0, 'Average Difference')
 Text(0, 0.5, 'Frequency')
-(array([  3.,   2.,   2.,   7.,   2.,   7.,  17.,  26.,  18.,  34.,  63.,
-        42.,  36., 100.,  76.,  69., 128.,  62.,  54.,  48.,  70.,  33.,
-        33.,  27.,  12.,  10.,  12.,   2.,   2.,   3.]), array([-0.016 , -0.0147, -0.0134, -0.0121, -0.0108, -0.0095, -0.0082,
-       -0.0069, -0.0056, -0.0043, -0.003 , -0.0017, -0.0004,  0.0009,
-        0.0022,  0.0035,  0.0048,  0.0061,  0.0074,  0.0087,  0.01  ,
-        0.0113,  0.0126,  0.0139,  0.0152,  0.0165,  0.0178,  0.0191,
-        0.0204,  0.0217,  0.023 ]), &lt;BarContainer object of 30 artists&gt;)
+(array([  2.,   1.,   2.,   2.,   4.,   9.,  14.,  12.,  36.,  26.,  60.,
+        51.,  51., 119.,  73.,  70., 125.,  56.,  56.,  75.,  39.,  52.,
+        16.,  18.,  18.,   8.,   4.,   0.,   0.,   1.]), array([-0.017     , -0.01563333, -0.01426667, -0.0129    , -0.01153333,
+       -0.01016667, -0.0088    , -0.00743333, -0.00606667, -0.0047    ,
+       -0.00333333, -0.00196667, -0.0006    ,  0.00076667,  0.00213333,
+        0.0035    ,  0.00486667,  0.00623333,  0.0076    ,  0.00896667,
+        0.01033333,  0.0117    ,  0.01306667,  0.01443333,  0.0158    ,
+        0.01716667,  0.01853333,  0.0199    ,  0.02126667,  0.02263333,
+        0.024     ]), &lt;BarContainer object of 30 artists&gt;)
 Text(0.5, 1.0, 'Sample Size: 1000')
 Text(0.5, 0, 'Average Difference')
 Text(0, 0.5, 'Frequency')</code></pre>
@@ -976,7 +977,7 @@ Text(0, 0.5, 'Frequency')</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-15-7.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="index-copy_files/figure-html/unnamed-chunk-15-7.png" class="img-fluid figure-img" width="1152"></p>
 </figure>
 </div>
 </div>

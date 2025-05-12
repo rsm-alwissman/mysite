@@ -23,22 +23,18 @@
         "\n",
         "### Data"
       ],
-      "id": "0406ffe6"
+      "id": "3b8ae243"
     },
     {
       "cell_type": "code",
       "metadata": {},
       "source": [
         "import pandas as pd\n",
-        "\n",
-        "# Load the datasets\n",
+        "# Load and read the files\n",
         "airbnb_data = pd.read_csv('/home/jovyan/mysite/airbnb.csv')\n",
-        "blueprinty_data = pd.read_csv('/home/jovyan/mysite/blueprinty.csv')\n",
-        "\n",
-        "# Display the first few rows of each dataset\n",
-        "airbnb_data.head(), blueprinty_data.head()"
+        "blueprinty_data = pd.read_csv('/home/jovyan/mysite/blueprinty.csv')"
       ],
-      "id": "52d1b7c8",
+      "id": "f7b6ed3c",
       "execution_count": null,
       "outputs": []
     }
