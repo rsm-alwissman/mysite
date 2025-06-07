@@ -4,4 +4,4 @@ title: "Alex's Resume"
 
 About this site
 
-{{< pdf other_documents/AWResume4.2024.pdf width=100% height=800 >}}
+{{< pdf other_documents/AWResume5.2025.pdf width=100% height=800 >}}
