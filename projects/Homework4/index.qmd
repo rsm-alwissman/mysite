@@ -168,7 +168,7 @@ plt.show()
 
 ```{python}
 # Plot WCSS and silhouette scores
-plt.figure(figsize=(7, 4))
+plt.figure(figsize=(7, 2))
 
 # Plot WCSS
 plt.subplot(1, 2, 1)
