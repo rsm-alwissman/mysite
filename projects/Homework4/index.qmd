@@ -168,7 +168,7 @@ plt.show()
 
 ```{python}
 # Plot WCSS and silhouette scores
-plt.figure(figsize=(7, 2))
+plt.figure(figsize=(6, 3))
 
 # Plot WCSS
 plt.subplot(1, 2, 1)
@@ -188,9 +188,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-_If you want a challenge, add your plots as an animated gif on your website so that the result looks something like [this](https://www.youtube.com/shorts/XCsoWZU9oN8)._
-
-
+The "right" number of clusters can be determined by:
+1. The "elbow" point in the WCSS plot, where the reduction in WCSS slows down significantly.
+2. The peak of the silhouette score plot, indicating the highest average silhouette score.
 
 ## 1b. Latent-Class MNL
 
@@ -224,8 +224,29 @@ y <- ifelse(x2 > boundary, 1, 0) |> as.factor()
 dat <- data.frame(x1 = x1, x2 = x2, y = y)
 ```
 
+
+
 :::: {.callout-note collapse="true"}
 ```{python}
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Generate data
+n = 100
+x1 = np.random.uniform(-3, 3, n)
+x2 = np.random.uniform(-3, 3, n)
+
+# Define a wiggly boundary
+boundary = np.sin(4 * x1) + x1
+
+# Determine binary outcome variable
+y = np.where(x2 > boundary, 1, 0)
+
+# Create a DataFrame
+dat = pd.DataFrame({'x1': x1, 'x2': x2, 'y': y})
+
+# Display the first few rows of the dataset
+print(dat.head())
 ```
 ::::
 
@@ -233,6 +254,22 @@ _todo: plot the data where the horizontal axis is `x1`, the vertical axis is `x2
 
 :::: {.callout-note collapse="true"}
 ```{python}
+plt.figure(figsize=(10, 6))
+
+# Scatter plot of the data points
+plt.scatter(dat['x1'], dat['x2'], c=dat['y'], cmap='bwr', edgecolor='k', s=50, label='Data points')
+
+# Plot the reference line with a slope of 1
+x_ref = np.linspace(dat['x1'].min(), dat['x1'].max(), 100)
+y_ref = x_ref  # y = x for slope of 1
+plt.plot(x_ref, y_ref, color='black', linestyle='--', label='Ref')
+
+# Add labels and legend
+plt.xlabel('x1')
+plt.ylabel('x2')
+plt.title('Scatterplot with reference line')
+plt.legend()
+plt.show()
 ```
 ::::
 
@@ -240,6 +277,25 @@ _todo: generate a test dataset with 100 points, using the same code as above but
 
 :::: {.callout-note collapse="true"}
 ```{python}
+# Set a different seed for reproducibility
+np.random.seed(123)
+
+# Generate test data
+n_test = 100
+x1_test = np.random.uniform(-3, 3, n_test)
+x2_test = np.random.uniform(-3, 3, n_test)
+
+# Define a wiggly boundary for the test dataset
+boundary_test = np.sin(4 * x1_test) + x1_test
+
+# Determine binary outcome variable for the test dataset
+y_test = np.where(x2_test > boundary_test, 1, 0)
+
+# Create a DataFrame for the test dataset
+test_dat = pd.DataFrame({'x1': x1_test, 'x2': x2_test, 'y': y_test})
+
+# Display the first few rows of the test dataset
+print(test_dat.head())
 ```
 ::::
 
