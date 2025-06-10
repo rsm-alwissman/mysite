@@ -362,5 +362,30 @@ plt.show()
 ```
 ::::
 
+```{python}
+# Initialize lists to store k values and accuracy scores
+k_values = range(1, 31)
+accuracy_scores = []
+
+# Loop through k values from 1 to 30
+for k in k_values:
+    # Predict using custom KNN
+    predictions = knn_predict(X_train, y_train, X_test, k)
+    
+    # Calculate accuracy
+    accuracy = accuracy_score(y_test, predictions)
+    accuracy_scores.append(accuracy * 100)  # Convert to percentage
+
+# Plot the results
+plt.figure(figsize=(10, 6))
+plt.plot(k_values, accuracy_scores, marker='o', linestyle='-', color='blue')
+plt.title('Accuracy vs Number of Neighbors (k)')
+plt.xlabel('Number of Neighbors (k)')
+plt.ylabel('Accuracy (%)')
+plt.xticks(k_values)
+plt.grid(True)
+plt.show()
+```
 
 The optimal value of k as suggested by the plot is 1, 2, or 6, as these values yield the highest accuracy of 95%.
+
