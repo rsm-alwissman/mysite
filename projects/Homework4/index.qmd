@@ -35,8 +35,6 @@ print(penguins_df.head())
 ```
 ::::
 
-_todo: do two analyses.  Do one of either 1a or 1b, AND one of either 2a or 2b._
-
 
 ## 1a. K-Means
 
@@ -363,5 +361,6 @@ plt.grid(True)
 plt.show()
 ```
 ::::
+
 
 The optimal value of k as suggested by the plot is 1, 2, or 6, as these values yield the highest accuracy of 95%.
