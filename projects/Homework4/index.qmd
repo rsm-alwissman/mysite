@@ -29,16 +29,9 @@ print(penguins_df.head())
 ```
 ::::
 
-:::: {.callout-note collapse="true"}
-```{python}
-
-```
-::::
-
-
 ## 1a. K-Means
 
-_todo: write your own code to implement the k-means algorithm.  Make plots of the various steps the algorithm takes so you can "see" the algorithm working.  Test your algorithm on the Palmer Penguins dataset, specifically using the bill length and flipper length variables.  Compare your results to the built-in `kmeans` function in R or Python._
+As an initial step, I'm implementing my own code to run the k-means algorithm below, including plots of the various steps the algorithm takes.
 
 ```{python}
 def kmeans_f(data, k, max_iters=100):
@@ -87,7 +80,6 @@ print("Centroids (selected columns):", centroids_selected)
 ```
 ::::
 
-:::: {.callout-note collapse="true"}
 ```{python}
 
 # Perform clustering using the built-in KMeans function
@@ -103,7 +95,6 @@ print("Custom KMeans cluster labels:", labels)
 print("Custom KMeans centroids:", centroids)
 
 ```
-::::
 
 Comparison of results:
 
@@ -111,9 +102,7 @@ Both the custom `kmeans_f` function and the built-in `sklearn.cluster.KMeans` fu
 
 However, when clustering is performed on the selected columns (`data_selected`), the cluster labels and centroids differ between the two implementations. This discrepancy may arise due to differences in initialization, convergence criteria, or handling of the reduced dimensionality in the custom implementation compared to the built-in function.
 
-_todo: Calculate both the within-cluster-sum-of-squares and silhouette scores (you can use built-in functions to do so) and plot the results for various numbers of clusters (ie, K=2,3,...,7). What is the "right" number of clusters as suggested by these two metrics?_
-
-
+Calculation of the within-cluster-sum-of-squares and silhouette scores.
 
 :::: {.callout-note collapse="true"}
 ```{python}
@@ -190,12 +179,7 @@ The "right" number of clusters can be determined by:
 1. The "elbow" point in the WCSS plot, where the reduction in WCSS slows down significantly.
 2. The peak of the silhouette score plot, indicating the highest average silhouette score.
 
-
-
-
 ## 2a. K Nearest Neighbors
-
-_todo: use the following code (or the python equivalent) to generate a synthetic dataset for the k-nearest neighbors algorithm.  The code generates a dataset with two features, `x1` and `x2`, and a binary outcome variable `y` that is determined by whether `x2` is above or below a wiggly boundary defined by a sin function._
 
 ```{r}
 # gen data -----
@@ -211,8 +195,7 @@ y <- ifelse(x2 > boundary, 1, 0) |> as.factor()
 dat <- data.frame(x1 = x1, x2 = x2, y = y)
 ```
 
-
-
+The Python code equivalent is outlined below.
 :::: {.callout-note collapse="true"}
 ```{python}
 # Set seed for reproducibility
@@ -237,9 +220,8 @@ print(dat.head())
 ```
 ::::
 
-_todo: plot the data where the horizontal axis is `x1`, the vertical axis is `x2`, and the points are colored by the value of `y`.  You may optionally draw the wiggly boundary._
+Data plot with x1 on horizontal axis and x2 on vertical axis, color lables based on Y value.
 
-:::: {.callout-note collapse="true"}
 ```{python}
 plt.figure(figsize=(10, 6))
 
@@ -258,9 +240,8 @@ plt.title('Scatterplot with reference line')
 plt.legend()
 plt.show()
 ```
-::::
 
-_todo: generate a test dataset with 100 points, using the same code as above but with a different seed._
+Test dataset with 100 points, using a different seed for reproducibility.
 
 :::: {.callout-note collapse="true"}
 ```{python}
@@ -286,7 +267,7 @@ print(test_dat.head())
 ```
 ::::
 
-_todo: implement KNN by hand.  Check you work with a built-in function -- eg, `class::knn()` or `caret::train(method="knn")` in R, or scikit-learn's `KNeighborsClassifier` in Python._
+Custom KNN implementation
 
 :::: {.callout-note collapse="true"}
 ```{python}
@@ -333,7 +314,7 @@ print("Scikit-learn KNN Accuracy:", accuracy_score(y_test, sklearn_knn_predictio
 ```
 ::::
 
-_todo: run your function for k=1,...,k=30, each time noting the percentage of correctly-classified points from the test dataset. Plot the results, where the horizontal axis is 1-30 and the vertical axis is the percentage of correctly-classified points. What is the optimal value of k as suggested by your plot?_ 
+Finally, running the function for k=1,...,k=30 and plotting the percentage of correctly-classified points from the test dataset.
 
 :::: {.callout-note collapse="true"}
 ```{python}
